@@ -36,7 +36,7 @@ def cityreader(cities=[]):
     with open('cities.csv', newline='') as csvfile:
         citiesreader = csv.DictReader(csvfile)
         for row in citiesreader:
-            cities.append(row['city'])
+            cities.append({row['city'], row['lat'], row['lng']})
     print(f' Number of cities: {len(cities)}')
     return cities
 
