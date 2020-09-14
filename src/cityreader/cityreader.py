@@ -27,7 +27,7 @@ def cityreader(cities=[]):
     with open('cities.csv', newline='') as csvfile:
         citiesreader = csv.DictReader(csvfile)
         for row in citiesreader:
-            cities.append({row['city'], float(row['lat']), float(row['lng'])})
+            cities.append([row['city'], float(row['lat']), float(row['lng'])])
     print(f' Number of cities: {len(cities)}')
     return cities
 
@@ -37,7 +37,9 @@ cityreader(cities)
 for c in cities:
     print(c)
 
-#print(cities) >> prints the entire cities list
+print(cities) #>> prints the entire cities list
+print(f'Idex 0: {cities[0]}')
+
 
 class City:
 
@@ -46,10 +48,10 @@ class City:
         self.lat = lat
         self.lon = lon
 
-    def __str__(self):
-        return f'City: {self.name}, Lat: {self.lat}, Lon: {self.lon}'
+    def __repr__(self):
+        return f'<City: {self.name}, {self.lat}, {self.lon}>'
 
-my_cities = City(**cities)
+my_cities = City(cities[0],cities[1], cities[2])
 print(my_cities)
 
 # STRETCH GOAL!
