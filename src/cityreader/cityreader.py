@@ -2,7 +2,6 @@
 # fields for name, lat and lon (representing latitude and longitude).
 
 
-
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
 #
@@ -17,29 +16,6 @@
 # should not be loaded into a City object.
 
 import csv
-cities = []
-
-def cityreader(cities=[]):
-     # TODO Implement the functionality to read from the 'cities.csv' file
-     # Ensure that the lat and lon valuse are all floats
-     # For each city record, create a new City instance and add it to the
-     # `cities` list
-    with open('cities.csv', newline='') as csvfile:
-        citiesreader = csv.DictReader(csvfile)
-        for row in citiesreader:
-            cities.append([row['city'], float(row['lat']), float(row['lng'])])
-    print(f' Number of cities: {len(cities)}')
-    return cities
-
-cityreader(cities)
-
-# Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
-
-print(cities) #>> prints the entire cities list
-print(f'Idex 0: {cities[0]}')
-
 
 class City:
 
@@ -48,11 +24,26 @@ class City:
         self.lat = lat
         self.lon = lon
 
-    def __repr__(self):
-        return f'<City: {self.name}, {self.lat}, {self.lon}>'
+    def __str__(self):
+        return(f'City:{self.name}, {self.lat}, {self.lon}')
 
-my_cities = City(cities[0],cities[1], cities[2])
-print(my_cities)
+cities = []
+
+def cityreader(cities=[]):
+    with open('cities.csv', newline='') as csvfile:
+        citiesreader = csv.DictReader(csvfile)
+        for row in citiesreader:
+            cities.append(City(row["city"], float(row["lat"]), float(row["lng"])))
+    return cities
+
+cityreader(cities)
+
+# Print the list of cities (name, lat, lon), 1 record per line.
+for c in cities:
+    print(c)
+
+
+
 
 # STRETCH GOAL!
 #
